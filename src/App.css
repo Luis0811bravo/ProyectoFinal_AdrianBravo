@@ -1,0 +1,18 @@
+.container {
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+.item-list-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.card {
+  background-color: lightgray;
+  border-radius: 10px;
+  width: 300px;
+  height: 400px;
+  margin-top: 50px;
+}
