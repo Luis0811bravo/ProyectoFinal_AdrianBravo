@@ -10,7 +10,7 @@ function App() {
     <>
         
       <NavBar />
-      <ItemListContainer mensaje="¡Bienvenido! ¿Qué café te gustaría probar hoy?" />
+      <ItemListContainer mensaje="¡Bienvenido! ¿Qué te gustaría probar hoy?" />
     </>
   )
 }

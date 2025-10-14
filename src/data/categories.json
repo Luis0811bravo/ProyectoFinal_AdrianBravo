@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Café",
+    "displayName": "Cafés",
+    "description": "Deliciosos cafés preparados con granos premium",
+    "img": "/assets/img/categoCafe.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Infusión",
+    "displayName": "Infusiones",
+    "description": "Bebidas naturales y refrescantes",
+    "img": "/assets/img/categoInfusiones.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Té",
+    "displayName": "Tés",
+    "description": "Tés tradicionales con propiedades únicas",
+    "img": "/assets/img/categoTes.jpg"
+  }
+]
