@@ -1,8 +1,7 @@
 import { useGetCategories } from "../hooks/useGetCategories";
-import Card from "./Card";
 import CategoryItem from "./CategoryItem";
 
-const ItemListContainer = ({ mensaje }) => {
+const CategoriesListContainer = ({ mensaje }) => {
   const { categories, loading } = useGetCategories();
 
   if (loading) {
@@ -21,4 +20,4 @@ const ItemListContainer = ({ mensaje }) => {
   );
 }
 
-export default ItemListContainer;
+export default CategoriesListContainer;

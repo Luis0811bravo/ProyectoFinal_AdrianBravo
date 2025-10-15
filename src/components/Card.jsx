@@ -1,6 +1,6 @@
-const Card = ({ children }) => {
+const Card = ({ children, className = "card" }) => {
   return (
-    <div className="card">
+    <div className={className}>
         {children}
     </div>
   );

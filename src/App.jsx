@@ -1,18 +1,22 @@
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
 import NavBar from './components/NavBar';
-import ItemListContainer from './components/ItemListContainer';
-import Card from './components/Card';
-import { useState } from 'react';
+import CategoriesListContainer from './components/CategoriesListContainer';
+import ProductListContainer from './components/ProductsListContainer';
 
 function App() {
 
   return (
-    <>
-        
+    <BrowserRouter>
       <NavBar />
-      <ItemListContainer mensaje="¡Bienvenido! ¿Qué te gustaría probar hoy?" />
-    </>
-  )
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/categories" element={<CategoriesListContainer mensaje="¡Bienvenido! ¿Qué te gustaría probar hoy?" />} />
+        <Route path="/products/:categoryId" element={<ProductListContainer />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
