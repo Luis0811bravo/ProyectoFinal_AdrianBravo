@@ -88,4 +88,4 @@ export const products = [
     "precio": 3.00,
     "disponible": true
   }
-]
+];
