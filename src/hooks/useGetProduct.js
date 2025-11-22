@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import local_products from '../data/products.json';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../services/firebase';
 
 export function useGetProduct(productId) {
     const [product, setProduct] = useState(null);
@@ -8,11 +9,24 @@ export function useGetProduct(productId) {
     useEffect(() => {
         if (productId == null) return;
 
-        const getProductById = () => {
-            const found = local_products.find((p) => p.id === Number(productId));
-            return new Promise((resolve) => {
-                setTimeout(() => resolve(found || null), 500);
-            });
+        const getProductById = async () => {
+            try {
+                const productRef = doc(db, 'products', productId);
+                const productSnap = await getDoc(productRef);
+                
+                if (productSnap.exists()) {
+                    return {
+                        id: productSnap.id,
+                        ...productSnap.data()
+                    };
+                } else {
+                    console.log('No se encontró el producto');
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error al obtener el producto:', error);
+                return null;
+            }
         };
 
         setLoading(true);

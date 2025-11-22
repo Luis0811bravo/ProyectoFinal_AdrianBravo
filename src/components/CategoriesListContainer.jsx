@@ -1,11 +1,12 @@
 import { useGetCategories } from "../hooks/useGetCategories";
 import CategoryItem from "./CategoryItem";
+import LoaderComponent from "./LoaderComponent";
 
 const CategoriesListContainer = ({ mensaje }) => {
   const { categories, loading } = useGetCategories();
 
   if (loading) {
-    return <h2>Cargando categorías...</h2>;
+    return <LoaderComponent />;
   }
 
   return (

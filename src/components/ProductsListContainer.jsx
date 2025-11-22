@@ -1,13 +1,14 @@
 import { useGetProducts } from "../hooks/useGetProducts";
 import ProductItem from "./ProductItem";
 import { useParams } from "react-router-dom";
+import LoaderComponent from "./LoaderComponent";
 
 const ProductsListContainer = ({ mensaje }) => {
   const { categoryId } = useParams();
   const { productsFilteredByCategory, loading } = useGetProducts(categoryId);
 
   if (loading) {
-    return <h2>Cargando productos...</h2>;
+    return <LoaderComponent />;
   }
 
   return (

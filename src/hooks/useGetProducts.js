@@ -1,26 +1,29 @@
 import {useState, useEffect} from 'react';
-import local_products from '../data/products.json';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../services/firebase';
 
 export function useGetProducts(categoryId) {
     const [productsFilteredByCategory, setProductsFilteredByCategory] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getProductsByCategory = () => {
-            const filtered = local_products.filter(product => product.categoriaId === Number(categoryId));
-
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(filtered);
-                }, 1000);
-            });
-        }
-
         setLoading(true);
 
-        getProductsByCategory()
-            .then((response) => setProductsFilteredByCategory(response))
-            .finally(() => setLoading(false));
+        const prodCollection = categoryId 
+        ? query(collection(db, 'products'), where('categoriaId', '==', Number(categoryId)))
+        : collection(db, 'products');
+
+        getDocs(prodCollection)
+        .then((res) => {
+            let products = res.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            setProductsFilteredByCategory(products);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false));
     }, [categoryId]);
 
     return { productsFilteredByCategory, loading };

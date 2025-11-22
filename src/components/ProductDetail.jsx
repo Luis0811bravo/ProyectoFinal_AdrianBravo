@@ -1,10 +1,19 @@
-import React from 'react';
+
 import ItemCount from './ItemCount';
+import { useContext, useState } from 'react';
+import { CartContext } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 
 
 const ProductDetail = ({ product }) => {
+  
+  const { addToCart } = useContext(CartContext);
+  const [purchase, setPurchase] = useState(false);
+
+
   const onAdd = (cantidad) => {
-    console.log(`Agregaste ${cantidad} unidades al carrito.`);
+    addToCart(product, cantidad);
+    setPurchase(true);
   };
 
   if (!product) {
@@ -30,7 +39,7 @@ const ProductDetail = ({ product }) => {
             <p className="price">Precio: <span>${typeof product.precio === 'number' ? product.precio.toFixed(2) : product.precio}</span></p>
 
             <div className="product-actions">
-              <ItemCount stock={product.stock ?? (product.disponible ? 10 : 0)} onAdd={onAdd} />
+              {purchase ? <Link to="/cart" className='btn-add'>Finalizar compra</Link> : <ItemCount disponible={product.disponible} onAdd={onAdd} />}
             </div>
           </div>
         </div>

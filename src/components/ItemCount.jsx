@@ -1,16 +1,16 @@
 import { useState } from "react";
 
-const ItemCount = ( { stock,  onAdd } ) => {
+const ItemCount = ( { disponible,  onAdd } ) => {
   const [count, setCount] = useState(1);
 
   const sumar = () => {
-    if (count < stock) {
+    if (disponible && count < 10) { // Máximo 10 unidades cuando está disponible
       setCount(count + 1);
     }
   };
 
   const restar = () => {
-    if (count > 0) {
+    if (count > 1) { // Mínimo 1 unidad
       setCount(count - 1);
     }
   };
@@ -24,7 +24,7 @@ const ItemCount = ( { stock,  onAdd } ) => {
       <button className="btn btn-danger" onClick={restar}>-</button>
       <span className="btn">{count}</span>
       <button className="btn btn-success" onClick={sumar}>+</button>
-      <button className="btn btn-primary" onClick={comprar} disabled={stock === 0 || count === 0}>Agregar al carrito</button>
+      <button className="btn btn-primary" onClick={comprar} disabled={!disponible || count === 0}>Agregar al carrito</button>
     </div>
   );
 };
